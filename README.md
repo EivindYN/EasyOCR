@@ -1,5 +1,11 @@
 # EasyOCR
 
+For update
+
+``` bash
+pip install easyocr & pip install git+git://github.com/eivindyn/easyocr.git
+```
+
 [![PyPI Status](https://badge.fury.io/py/easyocr.svg)](https://badge.fury.io/py/easyocr)
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/JaidedAI/EasyOCR/blob/master/LICENSE)
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.to/easyocr)
