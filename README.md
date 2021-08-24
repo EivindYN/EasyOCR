@@ -56,7 +56,7 @@ pip install easyocr
 For latest development release,
 
 ``` bash
-pip install git+git://github.com/jaidedai/easyocr.git
+pip install git+git://github.com/eivindyn/easyocr.git
 ```
 
 Note 1: for Windows, please install torch and torchvision first by following the official instruction here https://pytorch.org. On pytorch website, be sure to select the right CUDA version you have. If you intend to run on CPU mode only, select CUDA = None.
