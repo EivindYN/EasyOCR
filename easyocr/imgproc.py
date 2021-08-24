@@ -7,6 +7,7 @@ MIT License
 import numpy as np
 from skimage import io
 import cv2
+from PIL import Image
 
 def loadImage(img_file):
     img = io.imread(img_file)           # RGB order
@@ -16,6 +17,10 @@ def loadImage(img_file):
     img = np.array(img)
 
     return img
+
+def saveImage(img_array, name):
+    im = Image.fromarray(img_array)
+    im.save(name)
 
 def normalizeMeanVariance(in_img, mean=(0.485, 0.456, 0.406), variance=(0.229, 0.224, 0.225)):
     # should be RGB order

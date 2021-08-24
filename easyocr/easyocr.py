@@ -16,6 +16,7 @@ import sys
 from PIL import Image
 from logging import getLogger
 import yaml
+from .imgproc import saveImage
 
 if sys.version_info[0] == 2:
     from io import open
@@ -381,6 +382,9 @@ class Reader(object):
         image: file path or numpy-array or a byte stream object
         '''
         img, img_cv_grey = reformat_input(image)
+
+        saveImage(img, "C:\Users\eivin\Documents\GithubProjects\Master\Output")
+        saveImage(img_cv_grey, "C:\Users\eivin\Documents\GithubProjects\Master\Output")
 
         horizontal_list, free_list = self.detect(img, min_size, text_threshold,\
                                                  low_text, link_threshold,\
