@@ -3,7 +3,7 @@
 For update
 
 ``` bash
-pip install easyocr & pip install git+git://github.com/eivindyn/easyocr.git
+pip uninstall easyocr & pip install git+git://github.com/eivindyn/easyocr.git
 ```
 
 [![PyPI Status](https://badge.fury.io/py/easyocr.svg)](https://badge.fury.io/py/easyocr)
