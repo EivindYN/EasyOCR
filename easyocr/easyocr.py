@@ -2,9 +2,9 @@
 
 from .detection import get_detector, get_textbox
 from .recognition import get_recognizer, get_text
-from .utils import group_text_box, get_image_list, calculate_md5, get_paragraph,\
-                   download_and_unzip, printProgressBar, diff, reformat_input,\
-                   make_rotated_img_list, set_result_with_confidence,\
+from .utils import group_text_box, get_image_list, calculate_md5, get_paragraph,/
+                   download_and_unzip, printProgressBar, diff, reformat_input,/
+                   make_rotated_img_list, set_result_with_confidence,/
                    reformat_input_batched
 from .config import *
 from bidi.algorithm import get_display
@@ -233,8 +233,8 @@ class Reader(object):
                     }
             else:
                 network_params = recog_config['network_params']
-            self.recognizer, self.converter = get_recognizer(recog_network, network_params,\
-                                                         self.character, separator_list,\
+            self.recognizer, self.converter = get_recognizer(recog_network, network_params,/
+                                                         self.character, separator_list,/
                                                          dict_list, model_path, device = self.device, quantize=quantize)
 
     def setModelLanguage(self, language, lang_list, list_lang, list_lang_string):
@@ -261,13 +261,13 @@ class Reader(object):
         if model:
             symbol = model['symbols']
         else:
-            symbol = '0123456789!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ '
+            symbol = '0123456789!"#$%&/'()*+,-./:;<=>?@[//]^_`{|}~ '
         self.lang_char = set(self.lang_char).union(set(symbol))
         self.lang_char = ''.join(self.lang_char)
 
-    def detect(self, img, min_size = 20, text_threshold = 0.7, low_text = 0.4,\
-               link_threshold = 0.4,canvas_size = 2560, mag_ratio = 1.,\
-               slope_ths = 0.1, ycenter_ths = 0.5, height_ths = 0.5,\
+    def detect(self, img, min_size = 20, text_threshold = 0.7, low_text = 0.4,/
+               link_threshold = 0.4,canvas_size = 2560, mag_ratio = 1.,/
+               slope_ths = 0.1, ycenter_ths = 0.5, height_ths = 0.5,/
                width_ths = 0.5, add_margin = 0.1, reformat=True, optimal_num_chars=None):
 
         if reformat:
@@ -293,11 +293,11 @@ class Reader(object):
 
         return horizontal_list_agg, free_list_agg
 
-    def recognize(self, img_cv_grey, horizontal_list=None, free_list=None,\
-                  decoder = 'greedy', beamWidth= 5, batch_size = 1,\
-                  workers = 0, allowlist = None, blocklist = None, detail = 1,\
-                  rotation_info = None,paragraph = False,\
-                  contrast_ths = 0.1,adjust_contrast = 0.5, filter_ths = 0.003,\
+    def recognize(self, img_cv_grey, horizontal_list=None, free_list=None,/
+                  decoder = 'greedy', beamWidth= 5, batch_size = 1,/
+                  workers = 0, allowlist = None, blocklist = None, detail = 1,/
+                  rotation_info = None,paragraph = False,/
+                  contrast_ths = 0.1,adjust_contrast = 0.5, filter_ths = 0.003,/
                   y_ths = 0.5, x_ths = 1.0, reformat=True, output_format='standard'):
 
         if reformat:
@@ -324,16 +324,16 @@ class Reader(object):
                 h_list = [bbox]
                 f_list = []
                 image_list, max_width = get_image_list(h_list, f_list, img_cv_grey, model_height = imgH)
-                result0 = get_text(self.character, imgH, int(max_width), self.recognizer, self.converter, image_list,\
-                              ignore_char, decoder, beamWidth, batch_size, contrast_ths, adjust_contrast, filter_ths,\
+                result0 = get_text(self.character, imgH, int(max_width), self.recognizer, self.converter, image_list,/
+                              ignore_char, decoder, beamWidth, batch_size, contrast_ths, adjust_contrast, filter_ths,/
                               workers, self.device)
                 result += result0
             for bbox in free_list:
                 h_list = []
                 f_list = [bbox]
                 image_list, max_width = get_image_list(h_list, f_list, img_cv_grey, model_height = imgH)
-                result0 = get_text(self.character, imgH, int(max_width), self.recognizer, self.converter, image_list,\
-                              ignore_char, decoder, beamWidth, batch_size, contrast_ths, adjust_contrast, filter_ths,\
+                result0 = get_text(self.character, imgH, int(max_width), self.recognizer, self.converter, image_list,/
+                              ignore_char, decoder, beamWidth, batch_size, contrast_ths, adjust_contrast, filter_ths,/
                               workers, self.device)
                 result += result0
         # default mode will try to process multiple boxes at the same time
@@ -344,8 +344,8 @@ class Reader(object):
                 image_list = make_rotated_img_list(rotation_info, image_list)
                 max_width = max(max_width, imgH)
 
-            result = get_text(self.character, imgH, int(max_width), self.recognizer, self.converter, image_list,\
-                          ignore_char, decoder, beamWidth, batch_size, contrast_ths, adjust_contrast, filter_ths,\
+            result = get_text(self.character, imgH, int(max_width), self.recognizer, self.converter, image_list,/
+                          ignore_char, decoder, beamWidth, batch_size, contrast_ths, adjust_contrast, filter_ths,/
                           workers, self.device)
 
             if rotation_info and (horizontal_list+free_list):
@@ -369,13 +369,13 @@ class Reader(object):
         else:
             return result
 
-    def readtext(self, image, decoder = 'greedy', beamWidth= 5, batch_size = 1,\
-                 workers = 0, allowlist = None, blocklist = None, detail = 1,\
-                 rotation_info = None, paragraph = False, min_size = 20,\
-                 contrast_ths = 0.1,adjust_contrast = 0.5, filter_ths = 0.003,\
-                 text_threshold = 0.7, low_text = 0.4, link_threshold = 0.4,\
-                 canvas_size = 2560, mag_ratio = 1.,\
-                 slope_ths = 0.1, ycenter_ths = 0.5, height_ths = 0.5,\
+    def readtext(self, image, decoder = 'greedy', beamWidth= 5, batch_size = 1,/
+                 workers = 0, allowlist = None, blocklist = None, detail = 1,/
+                 rotation_info = None, paragraph = False, min_size = 20,/
+                 contrast_ths = 0.1,adjust_contrast = 0.5, filter_ths = 0.003,/
+                 text_threshold = 0.7, low_text = 0.4, link_threshold = 0.4,/
+                 canvas_size = 2560, mag_ratio = 1.,/
+                 slope_ths = 0.1, ycenter_ths = 0.5, height_ths = 0.5,/
                  width_ths = 0.5, y_ths = 0.5, x_ths = 1.0, add_margin = 0.1, output_format='standard'):
         '''
         Parameters:
@@ -383,33 +383,33 @@ class Reader(object):
         '''
         img, img_cv_grey = reformat_input(image)
 
-        saveImage(img, "C:\Users\eivin\Documents\GithubProjects\Master\Output\img.jpg")
-        saveImage(img_cv_grey, "C:\Users\eivin\Documents\GithubProjects\Master\Output\img_cv.jpg")
+        saveImage(img, "C:/Users/eivin/Documents/GithubProjects/Master/Output/img.jpg")
+        saveImage(img_cv_grey, "C:/Users/eivin/Documents/GithubProjects/Master/Output/img_cv.jpg")
 
-        horizontal_list, free_list = self.detect(img, min_size, text_threshold,\
-                                                 low_text, link_threshold,\
-                                                 canvas_size, mag_ratio,\
-                                                 slope_ths, ycenter_ths,\
-                                                 height_ths,width_ths,\
+        horizontal_list, free_list = self.detect(img, min_size, text_threshold,/
+                                                 low_text, link_threshold,/
+                                                 canvas_size, mag_ratio,/
+                                                 slope_ths, ycenter_ths,/
+                                                 height_ths,width_ths,/
                                                  add_margin, False)
         # get the 1st result from hor & free list as self.detect returns a list of depth 3
         horizontal_list, free_list = horizontal_list[0], free_list[0]
-        result = self.recognize(img_cv_grey, horizontal_list, free_list,\
-                                decoder, beamWidth, batch_size,\
-                                workers, allowlist, blocklist, detail, rotation_info,\
-                                paragraph, contrast_ths, adjust_contrast,\
+        result = self.recognize(img_cv_grey, horizontal_list, free_list,/
+                                decoder, beamWidth, batch_size,/
+                                workers, allowlist, blocklist, detail, rotation_info,/
+                                paragraph, contrast_ths, adjust_contrast,/
                                 filter_ths, y_ths, x_ths, False, output_format)
 
         return result
 
-    def readtext_batched(self, image, n_width=None, n_height=None,\
-                         decoder = 'greedy', beamWidth= 5, batch_size = 1,\
-                         workers = 0, allowlist = None, blocklist = None, detail = 1,\
-                         rotation_info = None, paragraph = False, min_size = 20,\
-                         contrast_ths = 0.1,adjust_contrast = 0.5, filter_ths = 0.003,\
-                         text_threshold = 0.7, low_text = 0.4, link_threshold = 0.4,\
-                         canvas_size = 2560, mag_ratio = 1.,\
-                         slope_ths = 0.1, ycenter_ths = 0.5, height_ths = 0.5,\
+    def readtext_batched(self, image, n_width=None, n_height=None,/
+                         decoder = 'greedy', beamWidth= 5, batch_size = 1,/
+                         workers = 0, allowlist = None, blocklist = None, detail = 1,/
+                         rotation_info = None, paragraph = False, min_size = 20,/
+                         contrast_ths = 0.1,adjust_contrast = 0.5, filter_ths = 0.003,/
+                         text_threshold = 0.7, low_text = 0.4, link_threshold = 0.4,/
+                         canvas_size = 2560, mag_ratio = 1.,/
+                         slope_ths = 0.1, ycenter_ths = 0.5, height_ths = 0.5,/
                          width_ths = 0.5, y_ths = 0.5, x_ths = 1.0, add_margin = 0.1, output_format='standard'):
         '''
         Parameters:
@@ -421,20 +421,20 @@ class Reader(object):
         '''
         img, img_cv_grey = reformat_input_batched(image, n_width, n_height)
 
-        horizontal_list_agg, free_list_agg = self.detect(img, min_size, text_threshold,\
-                                                         low_text, link_threshold,\
-                                                         canvas_size, mag_ratio,\
-                                                         slope_ths, ycenter_ths,\
-                                                         height_ths, width_ths,\
+        horizontal_list_agg, free_list_agg = self.detect(img, min_size, text_threshold,/
+                                                         low_text, link_threshold,/
+                                                         canvas_size, mag_ratio,/
+                                                         slope_ths, ycenter_ths,/
+                                                         height_ths, width_ths,/
                                                          add_margin, False)
         result_agg = []
         # put img_cv_grey in a list if its a single img
         img_cv_grey = [img_cv_grey] if len(img_cv_grey.shape) == 2 else img_cv_grey
         for grey_img, horizontal_list, free_list in zip(img_cv_grey, horizontal_list_agg, free_list_agg):
-            result_agg.append(self.recognize(grey_img, horizontal_list, free_list,\
-                                            decoder, beamWidth, batch_size,\
-                                            workers, allowlist, blocklist, detail, rotation_info,\
-                                            paragraph, contrast_ths, adjust_contrast,\
+            result_agg.append(self.recognize(grey_img, horizontal_list, free_list,/
+                                            decoder, beamWidth, batch_size,/
+                                            workers, allowlist, blocklist, detail, rotation_info,/
+                                            paragraph, contrast_ths, adjust_contrast,/
                                             filter_ths, y_ths, x_ths, False, output_format))
 
         return result_agg
