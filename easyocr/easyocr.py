@@ -383,8 +383,8 @@ class Reader(object):
         '''
         img, img_cv_grey = reformat_input(image)
 
-        saveImage(img, "C:\Users\eivin\Documents\GithubProjects\Master\Output")
-        saveImage(img_cv_grey, "C:\Users\eivin\Documents\GithubProjects\Master\Output")
+        saveImage(img, "C:\Users\eivin\Documents\GithubProjects\Master\Output\img.jpg")
+        saveImage(img_cv_grey, "C:\Users\eivin\Documents\GithubProjects\Master\Output\img_cv.jpg")
 
         horizontal_list, free_list = self.detect(img, min_size, text_threshold,\
                                                  low_text, link_threshold,\
