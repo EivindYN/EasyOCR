@@ -18,6 +18,10 @@ def loadImage(img_file):
 
     return img
 
+def saveText(txt, name):
+    with open(name, 'w') as f:
+        f.write(txt)
+
 def saveImage(img_array, name):
     im = Image.fromarray(img_array)
     im.save(name)

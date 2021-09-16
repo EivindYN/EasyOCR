@@ -16,7 +16,7 @@ import sys
 from PIL import Image
 from logging import getLogger
 import yaml
-from .imgproc import saveImage
+from .imgproc import saveImage, saveText
 
 if sys.version_info[0] == 2:
     from io import open
@@ -383,8 +383,8 @@ class Reader(object):
         '''
         img, img_cv_grey = reformat_input(image)
 
-        print("img", img)
-        print("img_cv_grey", img_cv_grey)
+        saveText(str(img), "C:/Users/eivin/Documents/GithubProjects/Master/Output/img.txt")
+        saveText(str(img_cv_grey), "C:/Users/eivin/Documents/GithubProjects/Master/Output/img_cv.txt")
         saveImage(img, "C:/Users/eivin/Documents/GithubProjects/Master/Output/img.jpg")
         saveImage(img_cv_grey, "C:/Users/eivin/Documents/GithubProjects/Master/Output/img_cv.jpg")
 
