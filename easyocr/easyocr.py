@@ -383,6 +383,8 @@ class Reader(object):
         '''
         img, img_cv_grey = reformat_input(image)
 
+        print("img", img)
+        print("img_cv_grey", img_cv_grey)
         saveImage(img, "C:/Users/eivin/Documents/GithubProjects/Master/Output/img.jpg")
         saveImage(img_cv_grey, "C:/Users/eivin/Documents/GithubProjects/Master/Output/img_cv.jpg")
 
